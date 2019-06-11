@@ -3,7 +3,7 @@ public class MaintenanceRequestHelper {
     public static void updateWorkOrders(){
         // update workorders
         //bulk determine
-        List<Case> maintenanceRequestList =[select id,case.Vehicle__c,Equipment__c,Equipment__r.Maintenance_Cycle__c,Type,Status, (Select Equipment__r.Maintenance_Cycle__c from Work_Parts__r)  from case where id in :Trigger.New limit 200];
+        List<Case> maintenanceRequestList =[select id,case.Vehicle__c,Equipment__c,Equipment__r.Maintenance_Cycle__c,Type,Status, (Select Equipment__r.Maintenance_Cycle__c from Work_Parts__r)  from case WHERE Id In :Trigger.New LIMIT 200];
         if( maintenanceRequestList !=null && maintenanceRequestList.size()>0 ){
             List<Case> insertMaintenanceRequest = getCaseList(maintenanceRequestList);
             insert insertMaintenanceRequest;
